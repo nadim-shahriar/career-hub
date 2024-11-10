@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import { getStoredJobApplication } from "../../utility/localStorage";
 
 
 
 const AppliedJobs = () => {
     const jobs = useLoaderData();
+    // const location = useLocation();
+    // console.log(location)
 
-    const[appliedJobs, setAppliedJobs] = useState([])
+    const [appliedJobs, setAppliedJobs] = useState([])
     // console.log(jobs)
     useEffect(() => {
         const storedJobIds = getStoredJobApplication();
@@ -23,6 +25,7 @@ const AppliedJobs = () => {
             // }
             console.log(jobsApplied)
             setAppliedJobs(jobsApplied)
+
         }
 
     }, [])
@@ -32,7 +35,7 @@ const AppliedJobs = () => {
             <h1 className="text-3xl">Jobs I applied: {appliedJobs.length}</h1>
             <ul>
                 {
-                    appliedJobs.map(job=> <li key={job.id}>
+                    appliedJobs.map(job => <li key={job.id}>
                         <h4><span className="font-bold">{job.job_title} </span> {job.company_name}: {job.remote_or_onsite
                         }</h4>
 
